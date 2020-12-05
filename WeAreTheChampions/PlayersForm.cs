@@ -167,6 +167,7 @@ namespace WeAreTheChampions
                 }
                 LoadPlayers();
                 txtTeamName.Clear();
+                //aslkdj
                 return;
             }
         }
