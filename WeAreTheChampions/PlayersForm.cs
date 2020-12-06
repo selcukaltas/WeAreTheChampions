@@ -55,13 +55,9 @@ namespace WeAreTheChampions
         private void dgvPlayers_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvPlayers.SelectedRows.Count < 1)
-            {
                 return;
-            }
             if (dgvPlayers.SelectedRows[0].Cells[0].Value == null)
-            {
                 return;
-            }
             int id = (int)dgvPlayers.SelectedRows[0].Cells[0].Value;
             Player player = db.Players.Find(id);
             txtPlayerName.Text = player.PlayerName;
@@ -181,7 +177,6 @@ namespace WeAreTheChampions
             }
             LoadPlayers();
             indexMethod(index);
-           
         }
 
         private void indexMethod(int index)
@@ -199,7 +194,6 @@ namespace WeAreTheChampions
                 }
             }
         }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (cboTeams.Text==string.Empty&&chkNoTeam.Checked==false)
@@ -213,11 +207,6 @@ namespace WeAreTheChampions
                 MessageBox.Show("There is no player for edit");
                 return;
             }
-            //if (cboTeams.SelectedValue==null&&chkNoTeam.Checked==false)
-            //{
-            //    MessageBox.Show("If you want edit null team please Check it NoTeam box");
-            //    return;
-            //}
             string playerName = txtPlayerName.Text.UpperCaseFirst().Trim();
             int id = (int)dgvPlayers.SelectedRows[0].Cells[0].Value;
             if (playerName == null || playerName == "")
@@ -310,7 +299,6 @@ namespace WeAreTheChampions
             btnEdit.Visible = true;
             btnAdd.Visible = true;
         }
-
         private void chkTeam_CheckedChanged(object sender, EventArgs e)
         {
             if (chkTeam.Checked)
@@ -327,9 +315,6 @@ namespace WeAreTheChampions
 
                 }
             }
-           
-            
-
         }
     }
 }

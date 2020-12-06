@@ -20,12 +20,10 @@ namespace WeAreTheChampions
             InitializeComponent();
             ListColors();
         }
-
         private void ListColors()
         {
             lstColors.DataSource = db.Colors.ToList();
         }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var colorName = txtColorName.Text.Trim();
@@ -75,7 +73,6 @@ namespace WeAreTheChampions
             ResetForm();
 
         }
-
         private void ResetForm()
         {
             lstColors.Enabled = true;
@@ -85,36 +82,28 @@ namespace WeAreTheChampions
             lblColor.BackColor = System.Drawing.Color.Black;
             hsBlue.Value = hsRed.Value = hsGreen.Value = hsBlue.Minimum;
         }
-
         #region Scroll Events
         private void hsRed_Scroll(object sender, ScrollEventArgs e)
         {
             lblRed.Text = hsRed.Value.ToString();
             lblColor.BackColor = System.Drawing.Color.FromArgb(Convert.ToByte(lblRed.Text), Convert.ToByte(lblGreen.Text), Convert.ToByte(lblBlue.Text));
         }
-
         private void hsGreen_Scroll(object sender, ScrollEventArgs e)
         {
             lblGreen.Text = hsGreen.Value.ToString();
             lblColor.BackColor = System.Drawing.Color.FromArgb(Convert.ToByte(lblRed.Text), Convert.ToByte(lblGreen.Text), Convert.ToByte(lblBlue.Text));
         }
-
         private void hsBlue_Scroll(object sender, ScrollEventArgs e)
         {
             lblBlue.Text = hsBlue.Value.ToString();
             lblColor.BackColor = System.Drawing.Color.FromArgb(Convert.ToByte(lblRed.Text), Convert.ToByte(lblGreen.Text), Convert.ToByte(lblBlue.Text));
-
-
         }
         #endregion
-
         private void lstColors_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             var selectedColor = (Models.Color)lstColors.SelectedItem;
             lblPreview.BackColor = System.Drawing.Color.FromArgb(selectedColor.Red, selectedColor.Green, selectedColor.Blue);
         }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (lstColors.SelectedIndex == 0)
@@ -126,7 +115,6 @@ namespace WeAreTheChampions
             db.SaveChanges();
             ListColors();
         }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (lstColors.SelectedIndex < 0)
@@ -143,7 +131,6 @@ namespace WeAreTheChampions
             hsBlue.Value = Convert.ToInt32(selectedColor.Blue);
             hsRed.Value = Convert.ToInt32(selectedColor.Red);
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ResetForm();

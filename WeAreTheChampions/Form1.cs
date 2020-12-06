@@ -24,19 +24,19 @@ namespace WeAreTheChampions
         {
             dgvMatch.DataSource = db.Matches.OrderByDescending(x => x.MatchTime).Select(x => new
             {
-                MatchNo=x.Id,
+                MatchNo = x.Id,
                 Team1 = x.HomeTeam.TeamName,
                 Team2 = x.GuestTeam.TeamName,
                 //Color = x.HomeTeam.Colors.FirstOrDefault(y => y.Id == x.HomeTeamId),
                 Date = x.MatchTime,
                 Time = x.MatchTime,
-                Score=x.Score1+"-"+x.Score2,
+                Score = x.Score1 + "-" + x.Score2,
                 x.Result,
             }).ToList();
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvMatch.Rows.Count<1)
+            if (dgvMatch.Rows.Count < 1)
             {
                 MessageBox.Show("There is no match for edit");
                 return;
@@ -83,10 +83,10 @@ namespace WeAreTheChampions
                 return;
             }
             ButtonLocationVisibleNegative();
-           
+
             cboTeam1.DataSource = db.Teams.ToList();
             cboTeam2.DataSource = db.Teams.ToList();
-            if (match.Score1==null || match.Score2==null)
+            if (match.Score1 == null || match.Score2 == null)
             {
                 nudScore1.Value = 0;
                 nudScore2.Value = 0;
@@ -150,20 +150,17 @@ namespace WeAreTheChampions
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            
             chkScores.Text = "UpcomingMatch";
             gboItems.Text = "AddNewMatch";
-           
             if (btnAdd.Text == "Add")
             {
-                if (cboTeam1.Items.Count<1)
+                if (cboTeam1.Items.Count < 1)
                 {
                     MessageBox.Show("There is no team");
                     return;
                 }
                 if (chkScores.Checked)
                 {
-                   
                     Match match = new Match()
                     {
                         HomeTeamId = (int)cboTeam1.SelectedValue,
@@ -185,7 +182,6 @@ namespace WeAreTheChampions
                 }
                 else
                 {
-                    
                     Match match = new Match()
                     {
                         HomeTeamId = (int)cboTeam1.SelectedValue,
@@ -228,14 +224,14 @@ namespace WeAreTheChampions
                 return;
             cboTeam1.DataSource = db.Teams.ToList();
             cboTeam2.DataSource = db.Teams.ToList();
-            if (dgvMatch.SelectedRows[0].Cells[0].Value==null)
+            if (dgvMatch.SelectedRows[0].Cells[0].Value == null)
             {
                 return;
             }
             int id = (int)dgvMatch.SelectedRows[0].Cells[0].Value;
             Match match = db.Matches.Find(id);
 
-            if (match.Score1==null|| match.Score2==null)
+            if (match.Score1 == null || match.Score2 == null)
             {
                 nudScore1.Value = 0;
                 nudScore2.Value = 0;
@@ -251,7 +247,7 @@ namespace WeAreTheChampions
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            
+
             ButtonLocationVisiblePositive();
             if (btnEdit.Text == "Save ▼")
             {
@@ -285,18 +281,15 @@ namespace WeAreTheChampions
                     int secilecekIndeks = index >= dgvMatch.Rows.Count
                         ? dgvMatch.Rows.Count - 1
                         : index;
-
                     dgvMatch.Rows[secilecekIndeks].Selected = true;
                 }
             }
         }
-
         private void playersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PlayersForm frm = new PlayersForm(db);
             frm.ShowDialog();
         }
-
         private void chkScores_CheckedChanged(object sender, EventArgs e)
         {
             if (chkScores.Checked)
@@ -309,18 +302,14 @@ namespace WeAreTheChampions
                 nudScore1.Enabled = true;
                 nudScore2.Enabled = true;
             }
-            
-        }
 
+        }
         private void teamsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
             TeamsForm frmTeam = new TeamsForm(db);
             frmTeam.HasBeenChanged += FrmTeam_HasBeenChanged;
             frmTeam.ShowDialog();
-     
         }
-
         private void FrmTeam_HasBeenChanged(object sender, EventArgs e)
         {
             ShowMatches();
@@ -328,7 +317,6 @@ namespace WeAreTheChampions
             cboTeam2.DataSource = db.Teams.ToList();
             cboTeam1.Text = "";
             cboTeam2.Text = "";
-
         }
         private void chkHideMatches_CheckedChanged(object sender, EventArgs e)
         {
@@ -345,22 +333,18 @@ namespace WeAreTheChampions
                     x.Result,
                 }).ToList();
             else
-            {
                 ShowMatches();
-            }
         }
-
         private void colorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorsForm colorsForm = new ColorsForm(db);
             colorsForm.ShowDialog();
         }
-
         private void cboTeam1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var team = (Team)cboTeam1.SelectedItem;
             var renkler = team.Colors.ToList();
-           
+
             if (renkler.Count == 0)
             {
                 return;
@@ -374,7 +358,6 @@ namespace WeAreTheChampions
                 lblBg.BackColor = System.Drawing.Color.FromArgb(renkler[0].Red, renkler[0].Green, renkler[0].Blue);
                 lblBg2.BackColor = System.Drawing.Color.FromArgb(renkler[1].Red, renkler[1].Green, renkler[1].Blue);
             }
-           
         }
         private void cboTeam2_SelectedIndexChanged(object sender, EventArgs e)
         {

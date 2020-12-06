@@ -25,24 +25,20 @@ namespace WeAreTheChampions
             LoadColors();
             cboColor1.SelectedIndex = cboColor2.SelectedIndex = -1;
         }
-
         private void LoadColors()
         {
             cboColor1.DataSource = db.Colors.ToList();
             cboColor2.DataSource = db.Colors.ToList();
         }
-
         private void WhenMakeChange(EventArgs args)
         {
             HasBeenChanged?.Invoke(this, args);
         }
-
         private void LoadTeams()
         {
             dgvTeams.DataSource = db.Teams.ToList();
 
         }
-
         private void btnAddPlayer_Click(object sender, EventArgs e)
         {
             if (dgvTeams.Rows.Count < 1)
@@ -56,16 +52,14 @@ namespace WeAreTheChampions
 
             form2.ShowDialog();
         }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             List<Models.Color> colors = new List<Models.Color>();
             var color1 = (Models.Color)cboColor1.SelectedItem;
-            var color2= (Models.Color)cboColor2.SelectedItem;
+            var color2 = (Models.Color)cboColor2.SelectedItem;
             string teamName = txtTeamName.Text.UpperCaseFirst().Trim();
-            if (btnAdd.Text=="Save")
+            if (btnAdd.Text == "Save")
             {
-              
                 if (color1 == null || color2 == null)
                 {
                     MessageBox.Show("Have to choose two colors.");
@@ -74,10 +68,7 @@ namespace WeAreTheChampions
                 colors.Add(color1);
                 colors.Add(color2);
                 var selectedTeam = (Team)dgvTeams.SelectedRows[0].DataBoundItem;
-
                 selectedTeam.Colors = colors;
-
-
                 if (dgvTeams.Rows.Count < 1)
                 {
                     MessageBox.Show("There is no team for edit");
@@ -92,7 +83,6 @@ namespace WeAreTheChampions
                 }
 
                 int index = dgvTeams.SelectedRows[0].Index;
-
                 if (teamName != team.TeamName)
                 {
                     if (db.Teams.Any(x => x.TeamName.Replace(" ", "") == txtTeamName.Text.Replace(" ", "")))
@@ -101,7 +91,6 @@ namespace WeAreTheChampions
                         return;
                     }
                 }
-
                 team.TeamName = teamName;
                 db.SaveChanges();
                 LoadTeams();
@@ -117,7 +106,6 @@ namespace WeAreTheChampions
                 MessageBox.Show("Have to choose two colors.");
                 return;
             }
-
             if (teamName == "")
             {
                 MessageBox.Show("Please write a correct team name");
@@ -136,7 +124,6 @@ namespace WeAreTheChampions
             txtTeamName.Clear();
             WhenMakeChange(EventArgs.Empty);
         }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int id = (int)dgvTeams.SelectedRows[0].Cells[0].Value;
@@ -161,7 +148,6 @@ namespace WeAreTheChampions
             }
             btnEdit.Text = "Cancel";
         }
-
         private void dgvTeams_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvTeams.SelectedRows.Count < 1)
@@ -183,7 +169,6 @@ namespace WeAreTheChampions
                 lblBg.BackColor = System.Drawing.Color.FromArgb(renkler[0].Red, renkler[0].Green, renkler[0].Blue);
                 lblBg2.BackColor = System.Drawing.Color.Transparent;
                 cboColor1.SelectedItem = renkler[0];
-
             }
             else
             {
@@ -192,9 +177,7 @@ namespace WeAreTheChampions
                 cboColor1.SelectedItem = renkler[0];
                 cboColor2.SelectedItem = renkler[1];
             }
-    
         }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int id = (int)dgvTeams.SelectedRows[0].Cells[0].Value;
@@ -248,17 +231,13 @@ namespace WeAreTheChampions
                 }
                 catch (Exception)
                 {
-
-                   
                 }
-               
             }
             if (dgvTeams.Rows.Count < 1)
             {
                 MessageBox.Show("There is no team for delete");
                 return;
             }
-
             var index = dgvTeams.SelectedRows[0].Index;
             if (team.Colors.Count != 0)
             {
@@ -284,7 +263,6 @@ namespace WeAreTheChampions
             }
             WhenMakeChange(EventArgs.Empty);
         }
-
         private void cboColor1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboColor1.SelectedIndex == -1)
@@ -295,7 +273,6 @@ namespace WeAreTheChampions
             var selectedColor = (Models.Color)cboColor1.SelectedItem;
             lblColor1.BackColor = System.Drawing.Color.FromArgb(selectedColor.Red, selectedColor.Green, selectedColor.Blue);
         }
-
         private void cboColor2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboColor2.SelectedIndex == -1)
@@ -306,18 +283,12 @@ namespace WeAreTheChampions
             var selectedColor = (Models.Color)cboColor2.SelectedItem;
             lblColor2.BackColor = System.Drawing.Color.FromArgb(selectedColor.Red, selectedColor.Green, selectedColor.Blue);
         }
-
         private void btnAddColor_Click(object sender, EventArgs e)
         {
             ColorsForm colorsForm = new ColorsForm(db);
             colorsForm.ShowDialog();
             LoadColors();
             cboColor1.SelectedIndex = cboColor2.SelectedIndex = -1;
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }
