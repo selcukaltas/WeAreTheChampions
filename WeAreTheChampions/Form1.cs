@@ -18,9 +18,17 @@ namespace WeAreTheChampions
         {
             InitializeComponent();
             dgvMatch.AutoGenerateColumns = false;
-            ShowMatches();
+            LoadMatches();
+            LoadTeams();
         }
-        private void ShowMatches()
+
+        private void LoadTeams()
+        {
+            cboTeam1.DataSource = db.Teams.ToList();
+            cboTeam2.DataSource = db.Teams.ToList();
+        }
+
+        private void LoadMatches()
         {
             dgvMatch.DataSource = db.Matches.OrderByDescending(x => x.MatchTime).Select(x => new
             {
@@ -76,7 +84,7 @@ namespace WeAreTheChampions
                 gboItems.Text = "EditYourMatch";
                 ButtonLocationVisiblePositive();
                 db.SaveChanges();
-                ShowMatches();
+                LoadMatches();
                 dgvMatch.ClearSelection();
                 btnEdit.Text = "Edit ✎";
                 dgvMatch.Rows[index].Selected = true;
@@ -84,8 +92,7 @@ namespace WeAreTheChampions
             }
             ButtonLocationVisibleNegative();
 
-            cboTeam1.DataSource = db.Teams.ToList();
-            cboTeam2.DataSource = db.Teams.ToList();
+            LoadTeams();
             if (match.Score1 == null || match.Score2 == null)
             {
                 nudScore1.Value = 0;
@@ -140,7 +147,7 @@ namespace WeAreTheChampions
                 btnAdd.Enabled = true;
                 ButtonLocationVisiblePositive();
                 db.SaveChanges();
-                ShowMatches();
+                LoadMatches();
                 btnEdit.Text = "Edit ✎";
                 return;
             }
@@ -154,7 +161,8 @@ namespace WeAreTheChampions
             gboItems.Text = "AddNewMatch";
             if (btnAdd.Text == "Add")
             {
-                if (cboTeam1.Items.Count < 1)
+               
+                if (cboTeam1.Items.Count < 1||cboTeam2.Items.Count<1)
                 {
                     MessageBox.Show("There is no team");
                     return;
@@ -177,7 +185,7 @@ namespace WeAreTheChampions
                     }
                     db.Matches.Add(match);
                     db.SaveChanges();
-                    ShowMatches();
+                    LoadMatches();
                     return;
                 }
                 else
@@ -188,7 +196,7 @@ namespace WeAreTheChampions
                         GuestTeamId = (int)cboTeam2.SelectedValue,
                         Score1 = (int)nudScore1.Value,
                         Score2 = (int)nudScore2.Value,
-                        MatchTime = dtpMatchTime.Value,    //COLOR MENUSU DAHA SONRA EKLENECEK
+                        MatchTime = dtpMatchTime.Value,    
                     };
                     match.Result = match.Score1 > match.Score2 ? (Result)2 : (Result)3;
                     if (match.Score1 == match.Score2)
@@ -200,17 +208,15 @@ namespace WeAreTheChampions
                     }
                     db.Matches.Add(match);
                     db.SaveChanges();
-                    ShowMatches();
+                    LoadMatches();
                     return;
                 }
             }
-            cboTeam1.DataSource = db.Teams.ToList();
-            cboTeam2.DataSource = db.Teams.ToList();
+            LoadTeams();
             dtpMatchTime.Value = DateTime.Now;
             nudScore1.Value = 0;
             nudScore2.Value = 0;
             btnEdit.Enabled = false;
-            btnDelete.Enabled = false;
             btnAdd.Text = "Add";
             ButtonLocationVisibleNegative();
         }
@@ -222,8 +228,7 @@ namespace WeAreTheChampions
         {
             if (dgvMatch.SelectedRows.Count < 1)
                 return;
-            cboTeam1.DataSource = db.Teams.ToList();
-            cboTeam2.DataSource = db.Teams.ToList();
+            LoadTeams();
             if (dgvMatch.SelectedRows[0].Cells[0].Value == null)
             {
                 return;
@@ -272,7 +277,7 @@ namespace WeAreTheChampions
             Match match = db.Matches.Find(id);
             db.Matches.Remove(match);
             db.SaveChanges();
-            ShowMatches();
+            LoadMatches();
             if (dgvMatch.SelectedRows.Count > 0)
             {
                 if (dgvMatch.Rows.Count > 0)
@@ -312,11 +317,8 @@ namespace WeAreTheChampions
         }
         private void FrmTeam_HasBeenChanged(object sender, EventArgs e)
         {
-            ShowMatches();
-            cboTeam1.DataSource = db.Teams.ToList();
-            cboTeam2.DataSource = db.Teams.ToList();
-            cboTeam1.Text = "";
-            cboTeam2.Text = "";
+            LoadMatches();
+            LoadTeams();
         }
         private void chkHideMatches_CheckedChanged(object sender, EventArgs e)
         {
@@ -333,7 +335,7 @@ namespace WeAreTheChampions
                     x.Result,
                 }).ToList();
             else
-                ShowMatches();
+                LoadMatches();
         }
         private void colorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
