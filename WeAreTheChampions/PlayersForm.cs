@@ -110,14 +110,6 @@ namespace WeAreTheChampions
                     MessageBox.Show("Please give the correct name");
                     return;
                 }
-                if (db.Players.Any(x=>x.Team.TeamName!=cboTeams.Text))
-                {
-                    if (db.Players.Any(x => x.PlayerName.Replace(" ", "") == playerName.Replace(" ", "")))
-                    {
-                        MessageBox.Show("This player is already in a team.If you want to change the team please check for edit.");
-                        return;
-                    }
-                }
                 Player player = new Player()
                 {
                     PlayerName = playerName,
@@ -141,11 +133,6 @@ namespace WeAreTheChampions
                 if (playerName == null || playerName == ""|| cboTeams.SelectedValue == null)
                 {
                     MessageBox.Show("Please fill the areas");
-                    return;
-                }
-                if (db.Players.Any(x => x.PlayerName.Replace(" ", "") == playerName.Replace(" ", "")))
-                {
-                    MessageBox.Show("This player is already in a team.");
                     return;
                 }
                 Player player = new Player()
