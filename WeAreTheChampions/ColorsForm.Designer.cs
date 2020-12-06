@@ -238,8 +238,10 @@
             this.Controls.Add(this.lblColor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtColorName);
+            this.MaximumSize = new System.Drawing.Size(402, 457);
+            this.MinimumSize = new System.Drawing.Size(402, 457);
             this.Name = "ColorsForm";
-            this.Text = "ColorsForm";
+            this.Text = "Colors";
             this.ResumeLayout(false);
             this.PerformLayout();
 

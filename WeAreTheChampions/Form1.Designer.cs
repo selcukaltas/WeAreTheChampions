@@ -32,8 +32,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,13 +59,13 @@
             this.lblVisitor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gboItems = new System.Windows.Forms.GroupBox();
+            this.lblBg4 = new System.Windows.Forms.Label();
+            this.lblBg3 = new System.Windows.Forms.Label();
+            this.lblBg2 = new System.Windows.Forms.Label();
+            this.lblBg = new System.Windows.Forms.Label();
             this.chkScores = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.chkHideMatches = new System.Windows.Forms.CheckBox();
-            this.lblBg = new System.Windows.Forms.Label();
-            this.lblBg2 = new System.Windows.Forms.Label();
-            this.lblBg3 = new System.Windows.Forms.Label();
-            this.lblBg4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudScore1)).BeginInit();
@@ -154,16 +154,16 @@
             // Column4
             // 
             this.Column4.DataPropertyName = "Date";
-            dataGridViewCellStyle3.Format = "MM/dd/yyyy";
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "MM/dd/yyyy";
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column4.HeaderText = "Date";
             this.Column4.Name = "Column4";
             // 
             // Column5
             // 
             this.Column5.DataPropertyName = "Time";
-            dataGridViewCellStyle4.Format = "hh:mm:ss tt";
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "hh:mm:ss tt";
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column5.HeaderText = "Time";
             this.Column5.Name = "Column5";
             // 
@@ -332,6 +332,38 @@
             this.gboItems.Text = "groupBox1";
             this.gboItems.Visible = false;
             // 
+            // lblBg4
+            // 
+            this.lblBg4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBg4.Location = new System.Drawing.Point(236, 57);
+            this.lblBg4.Name = "lblBg4";
+            this.lblBg4.Size = new System.Drawing.Size(35, 21);
+            this.lblBg4.TabIndex = 21;
+            // 
+            // lblBg3
+            // 
+            this.lblBg3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBg3.Location = new System.Drawing.Point(195, 57);
+            this.lblBg3.Name = "lblBg3";
+            this.lblBg3.Size = new System.Drawing.Size(35, 21);
+            this.lblBg3.TabIndex = 20;
+            // 
+            // lblBg2
+            // 
+            this.lblBg2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBg2.Location = new System.Drawing.Point(236, 29);
+            this.lblBg2.Name = "lblBg2";
+            this.lblBg2.Size = new System.Drawing.Size(35, 21);
+            this.lblBg2.TabIndex = 19;
+            // 
+            // lblBg
+            // 
+            this.lblBg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBg.Location = new System.Drawing.Point(195, 28);
+            this.lblBg.Name = "lblBg";
+            this.lblBg.Size = new System.Drawing.Size(35, 21);
+            this.lblBg.TabIndex = 18;
+            // 
             // chkScores
             // 
             this.chkScores.AutoSize = true;
@@ -365,38 +397,6 @@
             this.chkHideMatches.UseVisualStyleBackColor = true;
             this.chkHideMatches.CheckedChanged += new System.EventHandler(this.chkHideMatches_CheckedChanged);
             // 
-            // lblBg
-            // 
-            this.lblBg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblBg.Location = new System.Drawing.Point(195, 28);
-            this.lblBg.Name = "lblBg";
-            this.lblBg.Size = new System.Drawing.Size(35, 21);
-            this.lblBg.TabIndex = 18;
-            // 
-            // lblBg2
-            // 
-            this.lblBg2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblBg2.Location = new System.Drawing.Point(236, 29);
-            this.lblBg2.Name = "lblBg2";
-            this.lblBg2.Size = new System.Drawing.Size(35, 21);
-            this.lblBg2.TabIndex = 19;
-            // 
-            // lblBg3
-            // 
-            this.lblBg3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblBg3.Location = new System.Drawing.Point(195, 57);
-            this.lblBg3.Name = "lblBg3";
-            this.lblBg3.Size = new System.Drawing.Size(35, 21);
-            this.lblBg3.TabIndex = 20;
-            // 
-            // lblBg4
-            // 
-            this.lblBg4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblBg4.Location = new System.Drawing.Point(236, 57);
-            this.lblBg4.Name = "lblBg4";
-            this.lblBg4.Size = new System.Drawing.Size(35, 21);
-            this.lblBg4.TabIndex = 21;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -413,7 +413,7 @@
             this.MaximumSize = new System.Drawing.Size(769, 447);
             this.MinimumSize = new System.Drawing.Size(769, 447);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "WeAreTheChampions v1.0";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatch)).EndInit();

@@ -282,8 +282,10 @@
             this.Controls.Add(this.btnAddPlayer);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvTeams);
+            this.MaximumSize = new System.Drawing.Size(403, 413);
+            this.MinimumSize = new System.Drawing.Size(403, 413);
             this.Name = "TeamsForm";
-            this.Text = "TeamsForm";
+            this.Text = "Teams";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeams)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

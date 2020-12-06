@@ -299,9 +299,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTeamName);
             this.Controls.Add(this.dgvPlayers);
-            this.MinimumSize = new System.Drawing.Size(462, 437);
+            this.MaximumSize = new System.Drawing.Size(466, 440);
+            this.MinimumSize = new System.Drawing.Size(466, 440);
             this.Name = "PlayersForm";
-            this.Text = "PlayersForm";
+            this.Text = "Players";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
