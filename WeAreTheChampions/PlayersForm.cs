@@ -104,7 +104,7 @@ namespace WeAreTheChampions
         {
             if (chkNoTeam.Checked)
             {
-                string playerName = txtPlayerName.Text.Trim();
+                string playerName = txtPlayerName.Text.UpperCaseFirst().Trim();
                 if (playerName==null||playerName=="")
                 {
                     MessageBox.Show("Please give the correct name");
@@ -129,7 +129,7 @@ namespace WeAreTheChampions
             }
             else
             {
-                string playerName = txtPlayerName.Text.Trim();
+                string playerName = txtPlayerName.Text.UpperCaseFirst().Trim();
                 if (playerName == null || playerName == ""|| cboTeams.SelectedValue == null)
                 {
                     MessageBox.Show("Please fill the areas");
@@ -218,7 +218,7 @@ namespace WeAreTheChampions
             //    MessageBox.Show("If you want edit null team please Check it NoTeam box");
             //    return;
             //}
-            string playerName = txtPlayerName.Text.Trim();
+            string playerName = txtPlayerName.Text.UpperCaseFirst().Trim();
             int id = (int)dgvPlayers.SelectedRows[0].Cells[0].Value;
             if (playerName == null || playerName == "")
             {

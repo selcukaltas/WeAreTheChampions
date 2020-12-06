@@ -333,7 +333,7 @@ namespace WeAreTheChampions
         private void chkHideMatches_CheckedChanged(object sender, EventArgs e)
         {
             if (chkHideMatches.Checked)
-                dgvMatch.DataSource = db.Matches.OrderByDescending(x => x.MatchTime).Where(x => x.Result != 0).ToList().Select(x => new
+                dgvMatch.DataSource = db.Matches.OrderByDescending(x => x.MatchTime).Where(x => x.Result == 0).ToList().Select(x => new
                 {
                     MatchNo = x.Id,
                     Team1 = x.HomeTeam.TeamName,
@@ -376,7 +376,6 @@ namespace WeAreTheChampions
             }
            
         }
-
         private void cboTeam2_SelectedIndexChanged(object sender, EventArgs e)
         {
             var team2 = (Team)cboTeam2.SelectedItem;

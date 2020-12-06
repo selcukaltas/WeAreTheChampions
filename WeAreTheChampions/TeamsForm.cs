@@ -67,7 +67,7 @@ namespace WeAreTheChampions
                 return;
             }
 
-            string teamName = txtTeamName.Text.Trim();
+            string teamName = txtTeamName.Text.UpperCaseFirst().Trim();
             if (teamName == "")
             {
                 MessageBox.Show("Please write a correct team name");
@@ -81,7 +81,7 @@ namespace WeAreTheChampions
             List<Models.Color> colors = new List<Models.Color>();
             colors.Add(color1);
             colors.Add(color2);
-            db.Teams.Add(new Team() { TeamName = txtTeamName.Text, Colors = colors });
+            db.Teams.Add(new Team() { TeamName = teamName, Colors = colors });
             db.SaveChanges();
             LoadTeams();
             txtTeamName.Clear();
@@ -106,7 +106,7 @@ namespace WeAreTheChampions
             selectedTeam.Colors = colors;
 
 
-            string teamName = txtTeamName.Text.Trim();
+            string teamName = txtTeamName.Text.UpperCaseFirst().Trim();
             if (dgvTeams.Rows.Count < 1)
             {
                 MessageBox.Show("There is no team for edit");

@@ -78,6 +78,7 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\Utilities.cs" />
     <Compile Include="Models\WeAreTheChampionsContext.cs" />
     <Compile Include="PlayersForm.cs">
       <SubType>Form</SubType>
