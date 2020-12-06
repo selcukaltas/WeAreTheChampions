@@ -167,7 +167,7 @@ namespace WeAreTheChampions
                         GuestTeamId = (int)cboTeam2.SelectedValue,
                         Score1 = null,
                         Score2 = null,
-                        MatchTime = dtpMatchTime.Value,    //COLOR MENUSU DAHA SONRA EKLENECEK
+                        MatchTime = dtpMatchTime.Value,    
                     };
                     match.Result = (Result)0;
                     if (match.HomeTeamId == match.GuestTeamId)
