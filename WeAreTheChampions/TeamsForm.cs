@@ -126,6 +126,11 @@ namespace WeAreTheChampions
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (dgvTeams.Rows.Count < 1)
+            {
+                MessageBox.Show("There is no team for edit");
+                return;
+            }
             int id = (int)dgvTeams.SelectedRows[0].Cells[0].Value;
             Team team = db.Teams.Find(id);
             btnAdd.Text = "Save";
@@ -180,6 +185,11 @@ namespace WeAreTheChampions
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (dgvTeams.Rows.Count < 1)
+            {
+                MessageBox.Show("There is no team for Delete");
+                return;
+            }
             int id = (int)dgvTeams.SelectedRows[0].Cells[0].Value;
             Team team = db.Teams.Find(id);
             var renkler = team.Colors.ToList();
@@ -188,10 +198,17 @@ namespace WeAreTheChampions
                 team.Colors.Remove(item);
             }
             db.SaveChanges();
-            LoadTeams();
             try
             {
                 if (team.HomeMatches.Any(x => x.HomeTeam.TeamName == team.TeamName))
+                {
+                    DialogResult dr = MessageBox.Show("You can't delete this team first delete matches and players then you are free to delete :)", "Delete Team", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                    if (dr == DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+                else if (team.AwayMatches.Any(x => x.GuestTeam.TeamName == team.TeamName))
                 {
                     DialogResult dr = MessageBox.Show("You can't delete this team first delete matches and players then you are free to delete :)", "Delete Team", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                     if (dr == DialogResult.OK)

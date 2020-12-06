@@ -343,6 +343,10 @@ namespace WeAreTheChampions
         private void cboTeam1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var team = (Team)cboTeam1.SelectedItem;
+            if (team==null)
+            {
+                return;
+            }
             var renkler = team.Colors.ToList();
 
             if (renkler.Count == 0)
@@ -362,6 +366,10 @@ namespace WeAreTheChampions
         private void cboTeam2_SelectedIndexChanged(object sender, EventArgs e)
         {
             var team2 = (Team)cboTeam2.SelectedItem;
+            if (team2==null)
+            {
+                return;
+            }
             var renkler2 = team2.Colors.ToList();
             if (renkler2.Count == 0)
             {
