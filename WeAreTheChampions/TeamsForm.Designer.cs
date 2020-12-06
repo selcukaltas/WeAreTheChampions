@@ -143,7 +143,7 @@
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(102, 25);
             this.btnEdit.TabIndex = 15;
-            this.btnEdit.Text = "EditandSave";
+            this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -179,7 +179,6 @@
             // 
             // lblColor1
             // 
-            this.lblColor1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblColor1.Location = new System.Drawing.Point(344, 210);
             this.lblColor1.Name = "lblColor1";
             this.lblColor1.Size = new System.Drawing.Size(24, 21);
@@ -187,7 +186,6 @@
             // 
             // lblColor2
             // 
-            this.lblColor2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblColor2.Location = new System.Drawing.Point(344, 170);
             this.lblColor2.Name = "lblColor2";
             this.lblColor2.Size = new System.Drawing.Size(24, 22);

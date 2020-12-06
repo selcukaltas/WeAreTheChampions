@@ -59,15 +59,65 @@ namespace WeAreTheChampions
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            List<Models.Color> colors = new List<Models.Color>();
             var color1 = (Models.Color)cboColor1.SelectedItem;
-            var color2 = (Models.Color)cboColor2.SelectedItem;
+            var color2= (Models.Color)cboColor2.SelectedItem;
+            string teamName = txtTeamName.Text.UpperCaseFirst().Trim();
+            if (btnAdd.Text=="Save")
+            {
+              
+                if (color1 == null || color2 == null)
+                {
+                    MessageBox.Show("Have to choose two colors.");
+                    return;
+                }
+                colors.Add(color1);
+                colors.Add(color2);
+                var selectedTeam = (Team)dgvTeams.SelectedRows[0].DataBoundItem;
+
+                selectedTeam.Colors = colors;
+
+
+                if (dgvTeams.Rows.Count < 1)
+                {
+                    MessageBox.Show("There is no team for edit");
+                    return;
+                }
+                int id = (int)dgvTeams.SelectedRows[0].Cells[0].Value;
+                Team team = db.Teams.Find(id);
+                if (teamName == "")
+                {
+                    MessageBox.Show("Wrong Name");
+                    return;
+                }
+
+                int index = dgvTeams.SelectedRows[0].Index;
+
+                if (teamName != team.TeamName)
+                {
+                    if (db.Teams.Any(x => x.TeamName.Replace(" ", "") == txtTeamName.Text.Replace(" ", "")))
+                    {
+                        MessageBox.Show("This team already in a list.");
+                        return;
+                    }
+                }
+
+                team.TeamName = teamName;
+                db.SaveChanges();
+                LoadTeams();
+                dgvTeams.ClearSelection();
+                dgvTeams.Rows[index].Selected = true;
+                txtTeamName.Clear();
+                WhenMakeChange(EventArgs.Empty);
+                btnAdd.Text = "Add";
+                return;
+            }
             if (color1 == null || color2 == null)
             {
                 MessageBox.Show("Have to choose two colors.");
                 return;
             }
 
-            string teamName = txtTeamName.Text.UpperCaseFirst().Trim();
             if (teamName == "")
             {
                 MessageBox.Show("Please write a correct team name");
@@ -78,7 +128,6 @@ namespace WeAreTheChampions
                 MessageBox.Show("This team already in a list.");
                 return;
             }
-            List<Models.Color> colors = new List<Models.Color>();
             colors.Add(color1);
             colors.Add(color2);
             db.Teams.Add(new Team() { TeamName = teamName, Colors = colors });
@@ -90,54 +139,27 @@ namespace WeAreTheChampions
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-
-            var color1 = (Models.Color)cboColor1.SelectedItem;
-            var color2 = (Models.Color)cboColor2.SelectedItem;
-            if (color1 == null || color2 == null)
-            {
-                MessageBox.Show("Have to choose two colors.");
-                return;
-            }
-            List<Models.Color> colors = new List<Models.Color>();
-            colors.Add(color1);
-            colors.Add(color2);
-            var selectedTeam = (Team)dgvTeams.SelectedRows[0].DataBoundItem;
-
-            selectedTeam.Colors = colors;
-
-
-            string teamName = txtTeamName.Text.UpperCaseFirst().Trim();
-            if (dgvTeams.Rows.Count < 1)
-            {
-                MessageBox.Show("There is no team for edit");
-                return;
-            }
             int id = (int)dgvTeams.SelectedRows[0].Cells[0].Value;
             Team team = db.Teams.Find(id);
-            if (teamName == "")
+            btnAdd.Text = "Save";
+            var renkler = team.Colors.ToList();
+            if (renkler.Count == 1)
             {
-                MessageBox.Show("Wrong Name");
+                cboColor1.SelectedItem = renkler[0];
+            }
+            else if (renkler.Count == 2)
+            {
+                cboColor1.SelectedItem = renkler[0];
+                cboColor2.SelectedItem = renkler[1];
+            }
+            if (btnEdit.Text == "Cancel")
+            {
+                btnEdit.Text = "Edit";
+                txtTeamName.Clear();
+                btnAdd.Text = "AddNewTeam";
                 return;
             }
-
-            int index = dgvTeams.SelectedRows[0].Index;
-
-            if (teamName != team.TeamName)
-            {
-                if (db.Teams.Any(x => x.TeamName.Replace(" ", "") == txtTeamName.Text.Replace(" ", "")))
-                {
-                    MessageBox.Show("This team already in a list.");
-                    return;
-                }
-            }
-
-            team.TeamName = teamName;
-            db.SaveChanges();
-            LoadTeams();
-            dgvTeams.ClearSelection();
-            dgvTeams.Rows[index].Selected = true;
-            txtTeamName.Clear();
-            WhenMakeChange(EventArgs.Empty);
+            btnEdit.Text = "Cancel";
         }
 
         private void dgvTeams_SelectionChanged(object sender, EventArgs e)
@@ -160,12 +182,17 @@ namespace WeAreTheChampions
             {
                 lblBg.BackColor = System.Drawing.Color.FromArgb(renkler[0].Red, renkler[0].Green, renkler[0].Blue);
                 lblBg2.BackColor = System.Drawing.Color.Transparent;
+                cboColor1.SelectedItem = renkler[0];
+
             }
             else
             {
                 lblBg.BackColor = System.Drawing.Color.FromArgb(renkler[0].Red, renkler[0].Green, renkler[0].Blue);
                 lblBg2.BackColor = System.Drawing.Color.FromArgb(renkler[1].Red, renkler[1].Green, renkler[1].Blue);
+                cboColor1.SelectedItem = renkler[0];
+                cboColor2.SelectedItem = renkler[1];
             }
+    
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
