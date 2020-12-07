@@ -57,7 +57,7 @@ namespace WeAreTheChampions
             }
             var color = new Models.Color
             {
-                ColorName = txtColorName.Text,
+                ColorName = txtColorName.Text.UpperCaseFirst(),
                 Red = Convert.ToByte(lblRed.Text),
                 Green = Convert.ToByte(lblGreen.Text),
                 Blue = Convert.ToByte(lblBlue.Text)

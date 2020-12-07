@@ -168,8 +168,7 @@ namespace WeAreTheChampions
                 var team1 = (Team)cboTeam1.SelectedItem;
                 var team2 = (Team)cboTeam2.SelectedItem;
                 DateTime? matchDate = dtpMatchTime.Value;
-                try
-                {
+                
                     if (team1.HomeMatches.ToList().Any(x => x.MatchTime.Value.Date == matchDate.Value.Date)
                     || team1.AwayMatches.ToList().Any(x => x.MatchTime.Value.Date == matchDate.Value.Date))
                     {
@@ -182,9 +181,6 @@ namespace WeAreTheChampions
                         MessageBox.Show(" This team already have match ");
                         return;
                     }
-                }
-                catch (Exception) { }
-
                 if (chkScores.Checked)
                 {
                     Match match = new Match()

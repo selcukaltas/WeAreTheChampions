@@ -192,63 +192,19 @@ namespace WeAreTheChampions
             }
             int id = (int)dgvTeams.SelectedRows[0].Cells[0].Value;
             Team team = db.Teams.Find(id);
+            db.SaveChanges();
+            if (team.HomeMatches.Any(x => x.HomeTeam.TeamName == team.TeamName)|| team.AwayMatches.Any(x => x.GuestTeam.TeamName == team.TeamName)|| team.Players.Any(x => x.Team.TeamName == team.TeamName))
+            {
+                DialogResult dr = MessageBox.Show("You can't delete this team first delete matches and players then you are free to delete :)", "Delete Team", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (dr == DialogResult.OK)
+                {
+                    return;
+                }
+            }
             var renkler = team.Colors.ToList();
             foreach (var item in renkler)
             {
                 team.Colors.Remove(item);
-            }
-            db.SaveChanges();
-            try
-            {
-                if (team.HomeMatches.Any(x => x.HomeTeam.TeamName == team.TeamName))
-                {
-                    DialogResult dr = MessageBox.Show("You can't delete this team first delete matches and players then you are free to delete :)", "Delete Team", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                    if (dr == DialogResult.OK)
-                    {
-                        return;
-                    }
-                }
-                else if (team.AwayMatches.Any(x => x.GuestTeam.TeamName == team.TeamName))
-                {
-                    DialogResult dr = MessageBox.Show("You can't delete this team first delete matches and players then you are free to delete :)", "Delete Team", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                    if (dr == DialogResult.OK)
-                    {
-                        return;
-                    }
-                }
-                else if (team.Players.Any(x => x.Team.TeamName == team.TeamName))
-                {
-                    DialogResult dr = MessageBox.Show("You can't delete this team first delete matches and players then you are free to delete :)", "Delete Team", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                    if (dr == DialogResult.OK)
-                    {
-                        return;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    if (team.AwayMatches.Any(x => x.GuestTeam.TeamName == team.TeamName))
-                    {
-                        DialogResult dr = MessageBox.Show("You can't delete this team first delete matches and players then you are free to delete :)", "Delete Team", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                        if (dr == DialogResult.OK)
-                        {
-                            return;
-                        }
-                    }
-                    else if (team.Players.Any(x => x.Team.TeamName == team.TeamName))
-                    {
-                        DialogResult dr = MessageBox.Show("You can't delete this team first delete matches and players then you are free to delete :)", "Delete Team", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                        if (dr == DialogResult.OK)
-                        {
-                            return;
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                }
             }
             if (dgvTeams.Rows.Count < 1)
             {

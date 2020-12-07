@@ -11,6 +11,13 @@ namespace WeAreTheChampions.Models
     [Table("Teams")]
     public class Team
     {
+        public Team()
+        {
+            this.Players = new HashSet<Player>();
+            this.Colors = new HashSet<Color>();
+            this.HomeMatches = new HashSet<Match>();
+            this.AwayMatches = new HashSet<Match>();
+        }
         public int Id { get; set; }
         [Required,MaxLength(100)]
         public string TeamName { get; set; }
