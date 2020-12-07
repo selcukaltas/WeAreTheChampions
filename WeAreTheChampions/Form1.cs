@@ -35,7 +35,6 @@ namespace WeAreTheChampions
                 MatchNo = x.Id,
                 Team1 = x.HomeTeam.TeamName,
                 Team2 = x.GuestTeam.TeamName,
-                //Color = x.HomeTeam.Colors.FirstOrDefault(y => y.Id == x.HomeTeamId),
                 Date = x.MatchTime,
                 Time = x.MatchTime,
                 Score = x.Score1 + "-" + x.Score2,
@@ -58,7 +57,7 @@ namespace WeAreTheChampions
             if (btnEdit.Text == "Save ▼")
             {
                 int index = dgvMatch.SelectedRows[0].Index;
-                match.HomeTeamId = (int)cboTeam1.SelectedValue;                 //COLOR MENUSU DAHA SONRA EKLENECEK
+                match.HomeTeamId = (int)cboTeam1.SelectedValue;
                 match.GuestTeamId = (int)cboTeam2.SelectedValue;
                 if (chkScores.Checked)
                 {
@@ -91,7 +90,6 @@ namespace WeAreTheChampions
                 return;
             }
             ButtonLocationVisibleNegative();
-
             LoadTeams();
             if (match.Score1 == null || match.Score2 == null)
             {
@@ -161,12 +159,32 @@ namespace WeAreTheChampions
             gboItems.Text = "AddNewMatch";
             if (btnAdd.Text == "Add")
             {
-               
-                if (cboTeam1.Items.Count < 1||cboTeam2.Items.Count<1)
+
+                if (cboTeam1.Items.Count < 1 || cboTeam2.Items.Count < 1)
                 {
                     MessageBox.Show("There is no team");
                     return;
                 }
+                var team1 = (Team)cboTeam1.SelectedItem;
+                var team2 = (Team)cboTeam2.SelectedItem;
+                DateTime? matchDate = dtpMatchTime.Value;
+                try
+                {
+                    if (team1.HomeMatches.ToList().Any(x => x.MatchTime.Value.Date == matchDate.Value.Date)
+                    || team1.AwayMatches.ToList().Any(x => x.MatchTime.Value.Date == matchDate.Value.Date))
+                    {
+                        MessageBox.Show("This team already have match.");
+                        return;
+                    }
+                    if (team2.HomeMatches.ToList().Any(x => x.MatchTime.Value.Date == matchDate.Value.Date)
+                        || team2.AwayMatches.ToList().Any(x => x.MatchTime.Value.Date == matchDate.Value.Date))
+                    {
+                        MessageBox.Show(" This team already have match ");
+                        return;
+                    }
+                }
+                catch (Exception) { }
+
                 if (chkScores.Checked)
                 {
                     Match match = new Match()
@@ -175,7 +193,7 @@ namespace WeAreTheChampions
                         GuestTeamId = (int)cboTeam2.SelectedValue,
                         Score1 = null,
                         Score2 = null,
-                        MatchTime = dtpMatchTime.Value,    
+                        MatchTime = dtpMatchTime.Value,
                     };
                     match.Result = (Result)0;
                     if (match.HomeTeamId == match.GuestTeamId)
@@ -183,6 +201,7 @@ namespace WeAreTheChampions
                         MessageBox.Show("That compare not allowed. Check the teams!");
                         return;
                     }
+
                     db.Matches.Add(match);
                     db.SaveChanges();
                     LoadMatches();
@@ -196,7 +215,7 @@ namespace WeAreTheChampions
                         GuestTeamId = (int)cboTeam2.SelectedValue,
                         Score1 = (int)nudScore1.Value,
                         Score2 = (int)nudScore2.Value,
-                        MatchTime = dtpMatchTime.Value,    
+                        MatchTime = dtpMatchTime.Value,
                     };
                     match.Result = match.Score1 > match.Score2 ? (Result)2 : (Result)3;
                     if (match.Score1 == match.Score2)
@@ -317,7 +336,6 @@ namespace WeAreTheChampions
         }
         private void FrmTeam_HasBeenChanged(object sender, EventArgs e)
         {
-            LoadMatches();
             LoadTeams();
         }
         private void chkHideMatches_CheckedChanged(object sender, EventArgs e)
@@ -345,7 +363,7 @@ namespace WeAreTheChampions
         private void cboTeam1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var team = (Team)cboTeam1.SelectedItem;
-            if (team==null)
+            if (team == null)
             {
                 return;
             }
@@ -368,7 +386,7 @@ namespace WeAreTheChampions
         private void cboTeam2_SelectedIndexChanged(object sender, EventArgs e)
         {
             var team2 = (Team)cboTeam2.SelectedItem;
-            if (team2==null)
+            if (team2 == null)
             {
                 return;
             }
